@@ -18,23 +18,25 @@ def change():
  
  # Loop through all images in the folder
  for image_name in folder:
-    # Open each image
-    image = Image.open("/supplier-data/images/" + image_name)
-    
-    # Convert the image to a RGB 3-channel format
-    modified_image = image.convert('RGB')
    
-    # Resize the image to 600x400 pixel
-    modified_image = modified_image.resize((600, 400))
+   if image_name != ".DS_Store":
+     # Open each image
+     image = Image.open("/supplier-data/images/" + image_name)
     
-    # Converts from .tiff to .jpeg
-    image_name = image_name + ".jpg"
+     # Convert the image to a RGB 3-channel format
+     modified_image = image.convert('RGB')
+   
+     # Resize the image to 600x400 pixel
+     modified_image = modified_image.resize((600, 400))
+    
+     # Converts from .tiff to .jpeg
+     image_name = image_name + ".jpg"
 
-    # Set the new path of formatted image
-    directory = os.path.join(SAVE_PATH, image_name)
+     # Set the new path of formatted image
+     directory = os.path.join(SAVE_PATH, image_name)
    
-    # Save the formatted image to path
-    modified_image.save(directory)
+     # Save the formatted image to path
+     modified_image.save(directory)
 
 
    

@@ -19,8 +19,8 @@ def upload_images():
   # Loop through all the files in the directory
   for images in os.listdir(PATH):
     
-    # Check if file isn't a .DS_Store file
-    if images != ".DS_Store": 
+    # Check if file is a .jpg file
+    if images.endswith('.jpg'): 
       # Open the image 
       with open(PATH + images, 'rb') as image:
         # Send the modified image to web server

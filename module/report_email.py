@@ -4,9 +4,7 @@
 import os
 import datetime
 import reports
-from email.message import EmailMessage
-import mimetypes
-import smtplib
+import emails
 
 
 # Functions
@@ -37,16 +35,31 @@ def generate_pdf(path):
   # Create the title for the report
   title = "Processed Update on {}".format(get_date())
   
-  pdf_list = ["/tmp/processed.pdf", title, body_text]
+  pdf_list = ["/Users/rohan/desktop/IT-Certification-Final-Project/tmp/processed.pdf", title, body_text]
   return pdf_list
 
 if __name__ == '__main__':
 
    # Generate the pdf given the fruit data
-   pdf_list = generate_pdf("/supplier-data/description/")
+   pdf_list = generate_pdf("/Users/rohan/desktop/IT-Certification-Final-Project/supplier-data/description/")
    
    # Generate the pdf report
-   pdf_report = reports.generate_report(pdf_list[0], pdf_list[1], pdf_list[2])
-    
+   reports.generate_report(pdf_list[0], pdf_list[1], pdf_list[2])
    
-      
+   # Store all email information in variables 
+   sender = "automation@example.com"
+   recipient = "{}@example.com".format(os.environ['USER'])
+   subject = "Upload Complete - Online Fruit Store"
+   body = "All fruits are uploaded to our website successfully. A detailed list is attached to this email."   
+   
+   
+   # Generate the email
+   mail = emails.generate_email(sender, recipient, subject, body, "/Users/rohan/desktop/IT-Certification-Final-Project/tmp/processed.pdf")
+   
+   print(mail)
+
+   """
+   # Send the mail
+   emails.send_email(mail)
+   """
+   

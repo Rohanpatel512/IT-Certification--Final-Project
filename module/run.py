@@ -7,8 +7,8 @@ import requests
 
 
 # Constants
-DESCRIPTION_PATH = "/supplier-data/description/"
-IMAGE_PATH = "/supplier-data/images/"
+DESCRIPTION_PATH = "/Users/rohan/desktop/IT-Certification-Final-Project/supplier-data/description/"
+IMAGE_PATH = "/Users/rohan/desktop/IT-Certification-Final-Project/supplier-data/images/"
 
 # Functions
 def convert_to_json():
@@ -29,9 +29,8 @@ def convert_to_json():
       lines = txt_file.readlines()
   
       # Create the dictionary with data 
-      data = {"name": lines[0].strip(), "weight": lines[1].strip(" lbs\n"), "description": lines[2], "image_name": lines[0].strip() + ".jpg"}
+      data = {"name": lines[0].strip(), "weight": int(lines[1].strip(" lbs\n")), "description": lines[2], "image_name": lines[0].strip() + ".jpg"}
       # Send the data to web server
-      #print(data)
       response = requests.send(url, json=data)
  
   

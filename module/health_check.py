@@ -17,6 +17,18 @@ sender = "automation@example.com"
 recipient = "{}@example.com".format(os.environ['USER'])
 body = "Please check your system and resolve the issue as soon as possible."
 
+def email_report(subject):
+  """
+  Helper method used to generate the report given a subject
+  and send the email
+  """
+   
+  # Generate the error report email
+  error_mail = emails.generate_error_report(sender, recipient, subject, body)  
+  print(error_mail)
+  # Send the mail
+  #emails.send_mail(error_mail)
+
 # Functions
 def check_cpu_usage():
   """
@@ -32,11 +44,7 @@ def check_cpu_usage():
   
   # Check if CPU usage is over 80% 
   if cpu_usage > CPU_PERCENTAGE:
-    # Generate the error report email
-    error_mail = emails.generate_error_report(sender, recipient, subject, body)
-    
-    # Send the email
-    emails.send_email(error_mail)
+    email_report(subject)
 
 
 def check_disk_space():
@@ -57,11 +65,9 @@ def check_disk_space():
   
   # Check if available disk space is less than 20%
   if space < 20:
-    # Generate the error report email
-    error_mail = emails.generate_error_report(sender, recipient, subject, body) 
- 
-    # Send the mail
-    emails.send_email(error_mail)
+    email_report(subject)
+
+
 
 def check_memory():
   """
@@ -77,13 +83,10 @@ def check_memory():
   
   # Convert the available memory from bytes to megabytes
   available_memory_mb = available_memory / (1024**2)
-  
+    
   if available_memory_mb < MEMORY:
-    # Generate the error report email
-    error_mail = emails.generate_error_report(sender, recipient, subject, body)
-   
-    # Send the mail
-    emails.send_email(error_mail)
+    email_report(subject)
+
 
  
 def check_localhost():
@@ -97,11 +100,10 @@ def check_localhost():
   subject = "Error - localhost cannot be resolved to 127.0.0.1"
   
   # Get the hostname of local machine
-  hostname = socket.gethostname()
- 
+  #hostname = socket.gethostname()
+  hostname = "128.0.0.1"
   if hostname != "127.0.0.1":
-    # Generate the error report email
-    error_mail = emails.generate_error_report(sender, recipient, subject, body)
+    email_report(subject)
+
+check_localhost()
    
-    # Send the mail
-    emails.send_mail(error_mail)

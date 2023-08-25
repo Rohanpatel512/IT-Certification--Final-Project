@@ -23,7 +23,5 @@ def generate_report(filename, title, additional_info):
   # Build the report
   report.build([report_title, report_info])
   
-  # Return the pdf report
-  return report;
  
     

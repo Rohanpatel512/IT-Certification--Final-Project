@@ -18,7 +18,7 @@ def change():
  
  # Loop through all images in the folder
  for image_name in folder:
-   
+
    if image_name != ".DS_Store":
      
      # Open each image
@@ -29,16 +29,16 @@ def change():
    
      # Resize the image to 600x400 pixel
      modified_image = modified_image.resize((600, 400))
-    
+
      # Converts from .tiff to .jpg
      image_name = image_name + ".jpg"
 
      # Set the new path of formatted image
      directory = os.path.join(SAVE_PATH, image_name)
-   
+     
      # Save the formatted image to path
      modified_image.save(directory)
-
+   
 change()
     
     

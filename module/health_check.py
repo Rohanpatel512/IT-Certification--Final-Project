@@ -25,9 +25,8 @@ def email_report(subject):
    
   # Generate the error report email
   error_mail = emails.generate_error_report(sender, recipient, subject, body)  
-  print(error_mail)
   # Send the mail
-  #emails.send_mail(error_mail)
+  emails.send_mail(error_mail)
 
 # Functions
 def check_cpu_usage():
@@ -63,8 +62,8 @@ def check_disk_space():
   space = disk_usage.free / disk_usage.total
   space *= 100
   
-  # Check if available disk space is less than 20%
-  if space < 20:
+  # Check if available disk space is less than or equal to 20%
+  if space <= 20:
     email_report(subject)
 
 
@@ -83,8 +82,9 @@ def check_memory():
   
   # Convert the available memory from bytes to megabytes
   available_memory_mb = available_memory / (1024**2)
-    
-  if available_memory_mb < MEMORY:
+  
+  # Check if available memory is less than or equal to 500 MB
+  if available_memory_mb <= MEMORY:
     email_report(subject)
 
 
@@ -100,10 +100,16 @@ def check_localhost():
   subject = "Error - localhost cannot be resolved to 127.0.0.1"
   
   # Get the hostname of local machine
-  #hostname = socket.gethostname()
-  hostname = "128.0.0.1"
+  hostname = socket.gethostname()
+  
   if hostname != "127.0.0.1":
     email_report(subject)
 
-check_localhost()
+
+
+if __name__ == "__main__":
+   check_cpu_usage()
+   check_disk_space()
+   check_memory()
+   check_localhost()
    

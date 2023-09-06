@@ -35,13 +35,13 @@ def generate_pdf(path):
   # Create the title for the report
   title = "Processed Update on {}".format(get_date())
   
-  pdf_list = ["/Users/rohan/desktop/IT-Certification-Final-Project/tmp/processed.pdf", title, body_text]
+  pdf_list = ["/tmp/processed.pdf", title, body_text]
   return pdf_list
 
 if __name__ == '__main__':
 
    # Generate the pdf given the fruit data
-   pdf_list = generate_pdf("/Users/rohan/desktop/IT-Certification-Final-Project/supplier-data/description/")
+   pdf_list = generate_pdf("supplier-data/descriptions/")
    
    # Generate the pdf report
    reports.generate_report(pdf_list[0], pdf_list[1], pdf_list[2])
@@ -54,12 +54,8 @@ if __name__ == '__main__':
    
    
    # Generate the email
-   mail = emails.generate_email(sender, recipient, subject, body, "/Users/rohan/desktop/IT-Certification-Final-Project/tmp/processed.pdf")
-   
-   print(mail)
+   mail = emails.generate_email(sender, recipient, subject, body, "/tmp/processed.pdf")
 
-   """
    # Send the mail
    emails.send_email(mail)
-   """
    

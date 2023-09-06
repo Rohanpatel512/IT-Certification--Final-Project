@@ -6,6 +6,7 @@ import socket
 import shutil
 import psutil
 import emails
+import time
 
 # Constants
 CPU_PERCENTAGE = 80
@@ -108,8 +109,11 @@ def check_localhost():
 
 
 if __name__ == "__main__":
-   check_cpu_usage()
-   check_disk_space()
-   check_memory()
-   check_localhost()
+   while True:
+    check_cpu_usage()
+    check_disk_space()
+    check_memory()
+    check_localhost()
+    
+    time.sleep(60)
    
